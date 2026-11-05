@@ -46,7 +46,9 @@ E_Field::E_Field()
 	eZ = 0;
 }
 
-E_Field::~E_Field();
+E_Field::~E_Field()
+{
+};
 
 int main()
 {
