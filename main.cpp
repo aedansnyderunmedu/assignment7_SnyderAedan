@@ -158,13 +158,25 @@ int main()
 	M_default.setX(1.0); //assignment didn't give values for magnetic field.
 	M_default.setY(2.0);
 	M_default.setZ(2.0);
-	//cout chains
-	cout << "|Electric Field TEST|: " << E_default.getMag() << "\n";
-	cout << "|Electric Field magnitude|: " << E_comp.getMag() << "\n";
-	cout << "|Mag Field magnitude|: " << M_comp.getMag() << "\n";
+	//cout chains for givens
+	cout << "====Given field data====\n";
+	cout << "Electric Field components: x = " <<E_comp.getX() << ", y = " << E_comp.getY() << ", z = " << E_comp.getZ() << "\n"; 
+	cout << "Electric Field magnitude: " << E_comp.getMag() << "\n";
+	cout << "Electric Field Inner product: " << E_comp.getInnerp() << "\n\n";
+	cout << "Magnetic Field components: x = " <<M_comp.getX() << ", y = " << M_comp.getY() << ", z = " << M_comp.getZ() << "\n"; 
+	cout << "Mag Field magnitude: " << M_comp.getMag() << "\n";
 	cout << "Electric Field Inner product: " << E_comp.getInnerp() << "\n";
-	//M_default.uVector(); --> Was for testing. 
 	M_comp.uVector();
+	cout << "\n\n\n";
+	//cout chains for set fields
+	cout << "====New field data====\n";
+	cout << "Electric Field components: x = " <<E_default.getX() << ", y = " << E_default.getY() << ", z = " << E_default.getZ() << "\n"; 
+	cout << "Electric Field magnitude: " << E_default.getMag() << "\n";
+	cout << "Electric Field Inner product: " << E_default.getInnerp() << "\n\n";
+	cout << "Magnetic Field components: x = " <<M_default.getX() << ", y = " << M_default.getY() << ", z = " << M_default.getZ() << "\n"; 
+	cout << "Mag Field magnitude: " << M_default.getMag() << "\n";
+	cout << "Electric Field Inner product: " << E_default.getInnerp() << "\n";
+	M_default.uVector();
 
 	return 0;
 }
