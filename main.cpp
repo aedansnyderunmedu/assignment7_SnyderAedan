@@ -4,7 +4,7 @@
 using namespace std;
 
 //Electric Field code!
-class E_Field
+class Electric_Field
 {
 	private:
 		double *E;
@@ -12,7 +12,7 @@ class E_Field
 		//double eY;//
 		//double eZ;//
 	public:
-		E_Field()
+		Electric_Field()
 		{
 			E = new double[3];
 
@@ -21,7 +21,7 @@ class E_Field
 			E[2] = 0.0;
 		}
 		
-		E_Field(double x, double y, double z) //store x/y/z
+		Electric_Field(double x, double y, double z) //store x/y/z
 		{
 			E = new double[3];
 
@@ -30,7 +30,7 @@ class E_Field
 			E[2] = z;
 		}
 
-		~E_Field() //decon
+		~Electric_Field() //decon
 		{
 			delete[] E; //new uses [], delete does too. 
 		}
@@ -60,7 +60,7 @@ class E_Field
 			return E[2];
 		}
 		//data processing functions
-		double getMag() //simple magnitude equation, using square root from cmath
+		double calculateMagnitude() //simple magnitude equation, using square root from cmath
 		{
 			return sqrt(E[0]*E[0] + E[1]*E[1] + E[2]*E[2]);
 		}
@@ -71,21 +71,21 @@ class E_Field
 };
 
 //Magnetic field code!
-class M_Field
+class Magnetic_Field
 {
 	private:
 		double *M;
 	public:
-		M_Field()
+		Magnetic_Field()
 		{
-			M = new double[3]; //same logic as E_Field
+			M = new double[3]; //same logic as Electric_Field
 
 			M[0] = 0.0;
 			M[1] = 0.0;
 			M[2] = 0.0;
 		}
 
-		M_Field(double x, double y, double z)
+		Magnetic_Field(double x, double y, double z)
 		{
 			M = new double[3];
 
@@ -94,7 +94,7 @@ class M_Field
 			M[2] = z;
 		}
 
-		~M_Field() //deconstructor, same as above
+		~Magnetic_Field() //deconstructor, same as above
 		{
 			delete[] M;
 		}
@@ -124,13 +124,13 @@ class M_Field
 			return M[2];
 		}
 		//process functions
-		double getMag()
+		double calculateMagnitude()
 		{
 			return sqrt(M[0]*M[0] + M[1]*M[1] + M[2]*M[2]);
 		}
 		void uVector()
 		{
-			double mag = getMag();
+			double mag = calculateMagnitude();
 			if(mag == 0.0)
 			{
 				cout << "Undefined vector." << "\n"; //error print.
@@ -143,17 +143,17 @@ class M_Field
 int main()
 {
 	//electric constructors
-	E_Field E_default; //uses deault constructor for testing. 
+	Electric_Field E_default; //uses deault constructor for testing. 
 	
-	E_Field E_comp(1e5, 10.9, 1.7e2); //3-number constructor. taking COMPONENTS from assignment rubric. 
+	Electric_Field E_comp(1e5, 10.9, 1.7e2); //3-number constructor. taking COMPONENTS from assignment rubric. 
 	
 	E_default.setX(3.0); //test numbers. 
 	E_default.setY(4.0);
 	E_default.setZ(12.0);
 	//mag constructors
-	M_Field M_default; //as above
+	Magnetic_Field M_default; //as above
 
-	M_Field M_comp(0.5, 1.2, 2.0);
+	Magnetic_Field M_comp(0.5, 1.2, 2.0);
 
 	M_default.setX(1.0); //assignment didn't give values for magnetic field.
 	M_default.setY(2.0);
@@ -161,21 +161,19 @@ int main()
 	//cout chains for givens
 	cout << "====Given field data====\n";
 	cout << "Electric Field components: x = " <<E_comp.getX() << ", y = " << E_comp.getY() << ", z = " << E_comp.getZ() << "\n"; 
-	cout << "Electric Field magnitude: " << E_comp.getMag() << "\n";
+	cout << "Electric Field magnitude: " << E_comp.calculateMagnitude() << "\n";
 	cout << "Electric Field Inner product: " << E_comp.getInnerp() << "\n\n";
 	cout << "Magnetic Field components: x = " <<M_comp.getX() << ", y = " << M_comp.getY() << ", z = " << M_comp.getZ() << "\n"; 
-	cout << "Mag Field magnitude: " << M_comp.getMag() << "\n";
-	cout << "Electric Field Inner product: " << E_comp.getInnerp() << "\n";
+	cout << "Mag Field magnitude: " << M_comp.calculateMagnitude() << "\n";
 	M_comp.uVector();
 	cout << "\n\n\n";
 	//cout chains for set fields
 	cout << "====New field data====\n";
 	cout << "Electric Field components: x = " <<E_default.getX() << ", y = " << E_default.getY() << ", z = " << E_default.getZ() << "\n"; 
-	cout << "Electric Field magnitude: " << E_default.getMag() << "\n";
+	cout << "Electric Field magnitude: " << E_default.calculateMagnitude() << "\n";
 	cout << "Electric Field Inner product: " << E_default.getInnerp() << "\n\n";
 	cout << "Magnetic Field components: x = " <<M_default.getX() << ", y = " << M_default.getY() << ", z = " << M_default.getZ() << "\n"; 
-	cout << "Mag Field magnitude: " << M_default.getMag() << "\n";
-	cout << "Electric Field Inner product: " << E_default.getInnerp() << "\n";
+	cout << "Mag Field magnitude: " << M_default.calculateMagnitude() << "\n";
 	M_default.uVector();
 
 	return 0;
